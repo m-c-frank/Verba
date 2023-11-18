@@ -7,11 +7,13 @@ from goldenverba.components.generation.GPT4Generator import GPT4Generator
 from goldenverba.components.generation.GPT3Generator import GPT3Generator
 from goldenverba.components.generation.Llama2Generator import Llama2Generator
 from goldenverba.components.generation.CohereGenerator import CohereGenerator
+from goldenverba.components.generation.OllamaGenerator import OllamaGenerator
 
 
 class GeneratorManager:
     def __init__(self):
         self.generators: dict[str, Generator] = {
+            "OllamaGenerator": OllamaGenerator(),
             "GPT4Generator": GPT4Generator(),
             "GPT3Generator": GPT3Generator(),
             "CohereGenerator": CohereGenerator(),
