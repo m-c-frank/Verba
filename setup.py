@@ -39,6 +39,7 @@ setup(
         "cohere==4.33",
         "requests",
         "pypdf2",
+        "langchain",
     ],
     extras_require={
         "dev": ["pytest", "wheel", "twine", "black>=23.7.0", "setuptools"],
@@ -48,6 +49,7 @@ setup(
             "torch",
             "huggingface_hub",
             "accelerate",
+            "langchain",
         ],
     },
 )

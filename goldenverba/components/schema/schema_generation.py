@@ -7,7 +7,7 @@ from weaviate import Client
 VECTORIZERS = set(
     ["text2vec-openai", "text2vec-cohere"]
 )  # Needs to match with Weaviate modules
-EMBEDDINGS = set(["MiniLM"])  # Custom Vectors
+EMBEDDINGS = set(["MiniLM", "Ollama"])  # Custom Vectors
 
 
 def strip_non_letters(s: str):
