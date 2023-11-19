@@ -1,3 +1,7 @@
+from weaviate import Client
+
+from tqdm import tqdm
+
 from goldenverba.components.embedding.interface import Embedder
 from goldenverba.components.reader.document import Document
 from langchain.embeddings import OllamaEmbeddings
@@ -21,14 +25,25 @@ class OllamaEmbedder(Embedder):
         except Exception as e:
             print("Error initializing Ollama model:", e)
 
-    def embed(self, documents):
-        """
-        Embed documents using the Ollama model.
+ 
+    def embed(
+        self,
+        documents: list[Document],
+        client: Client,
+    ) -> bool:
+        """Embed verba documents and its chunks to Weaviate
+        @parameter: documents : list[Document] - List of Verba documents
+        @parameter: client : Client - Weaviate Client
+        @parameter: batch_size : int - Batch Size of Input
+        @returns bool - Bool whether the embedding what successful
         """
         if not self.model:
             raise RuntimeError("Ollama model is not initialized")
 
-        texts = [doc.content for doc in documents]
-        embeddings = self.model.embed_documents(texts)
-        return embeddings
+        for document in tqdm(
+            documents, total=len(documents), desc="Vectorizing document chunks"
+        ):
+            for chunk in document.chunks:
+                chunk.set_vector(self.model.embed_documents(chunk))
+        return self.import_data(documents, client)
 
