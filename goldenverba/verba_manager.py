@@ -294,6 +294,13 @@ class VerbaManager:
             self.installed_libraries["huggingface_hub"] = False
 
         try:
+            import langchain 
+
+            self.installed_libraries["langchain"] = True
+        except Exception as e:
+            self.installed_libraries["langchain"] = False
+
+        try:
             import transformers
 
             self.installed_libraries["transformers"] = True
