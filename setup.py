@@ -49,7 +49,6 @@ setup(
             "torch",
             "huggingface_hub",
             "accelerate",
-            "langchain",
         ],
     },
 )
